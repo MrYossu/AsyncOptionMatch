@@ -18,7 +18,7 @@ namespace AsyncOptionMatch {
       _investor.Match(
        async inv => {
           Term latestTerm = inv.Terms.OrderByDescending(ila => ila.End).First();
-          List<Share> shares = await _appDbContext.Shares();
+          List<Share> shares = await _appDbContext.Shares(); // In reality we would be doing some filtering here. Omitted for clarity
           return new RenewalViewModel {
             Start = latestTerm.End.AddDays(1),
             End = latestTerm.End.AddYears(1),
