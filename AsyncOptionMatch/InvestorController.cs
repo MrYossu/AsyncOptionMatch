@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LanguageExt;
 
@@ -17,14 +18,14 @@ namespace AsyncOptionMatch {
       _investor.Match(
        async inv => {
           Term latestTerm = inv.Terms.OrderByDescending(ila => ila.End).First();
-          var shares = await _appDbContext.Shares();
+          List<Share> shares = await _appDbContext.Shares();
           return new RenewalViewModel {
             Start = latestTerm.End.AddDays(1),
             End = latestTerm.End.AddYears(1),
             Shares = latestTerm.Shares.Select(s => new Share {
               Id = s.Id,
               Quantity = s.Quantity,
-              CompanyId = s.CompanyId
+              CompanyId = s.CompanyId,
             }).ToList(),
             OtherShares = new(),
           };
