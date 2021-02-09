@@ -27,7 +27,7 @@ namespace AsyncOptionMatch {
               Quantity = s.Quantity,
               CompanyId = s.CompanyId,
             }).ToList(),
-            OtherShares = new(),
+            OtherShares = shares,
           };
         },
         new RenewalViewModel());
